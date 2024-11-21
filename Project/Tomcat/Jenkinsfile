@@ -21,7 +21,7 @@ pipeline{
 	}
         stage('Git Checkout'){
             steps{
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'github access', url: 'https://github.com/devopscloudtrainer/Project-Management.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'github access', url: 'https://github.com/kalagaGangadhar/Project-Management.git']]])
             }
         }
         stage('build'){
