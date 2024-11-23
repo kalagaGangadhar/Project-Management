@@ -1,7 +1,7 @@
 pipeline{
     agent {
       node {
-        label 'slave_1'
+        label 'slave1'
       }
     }
 
@@ -20,7 +20,7 @@ pipeline{
 	}
        stage('Git Checkout'){
             steps{
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'github access', url: 'https://github.com/devopscloudtrainer/Project-Management.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'github access', url: 'https://github.com/kalagaGangadhar/Project-Management.git']]])
             }
         }
         stage('build'){
@@ -68,7 +68,7 @@ pipeline{
          stage ('Docker Build') {
                  steps {
                     script {
-                      sh "docker build -t goudsagar/webapp-app-tomcat:latest -f Project/Docker-Kubernetes/Dockerfile ."
+                      sh "docker build -t gangadharkalaga/webapp-app-tomcat:latest -f Project/Docker-Kubernetes/Dockerfile ."
                      }
                     } 
                 }
@@ -76,7 +76,7 @@ pipeline{
                  steps{
                    script {
                         withDockerRegistry(credentialsId: 'docker-credentials') {
-                            sh "docker push goudsagar/webapp-app-tomcat:latest"
+                            sh "docker push gangadharkalaga/webapp-app-tomcat:latest"
                      }
                   }
                }
