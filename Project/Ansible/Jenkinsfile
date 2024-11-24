@@ -79,7 +79,7 @@ pipeline{
                  }
                  steps{
                     script {
-                      sh "ansible-playbook -i /var/lib/jenkins/inventory Project/Ansible/webserver-1-tomcat.yml -vv"
+                      sh "ansible-playbook Project/Ansible/webserver-1-tomcat.yml -vv"
                      }
                     } 
                   }
