@@ -17,44 +17,43 @@ pipeline {
                 checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'github access', url: 'https://github.com/kalagaGangadhar/Project-Management.git']]])
             }
         }
-        stage('Terraform init') {
-            steps {
-                sh 'terraform init'
-                sh 'pwd'
-            }
-        }
-        stage('Terraform validate') {
-            steps {
-                sh 'terraform validate'
-                sh 'pwd'
-            }
-        }
-        stage('Terraform plan') {
-            steps {
-                sh 'terraform plan'
-                sh 'pwd'
-            }
-        }
-        stage('Terraform apply/destroy') {
-            parallel {
-                stage('Terraform apply') {
-                    when {
-                        expression {
-                            "$State" == "apply"
-                        }
-                    }
-                    steps {
-                        sh 'terraform apply --auto-approve'
-                    }
+        dir('/root/terraform-dir') {
+            stage('Terraform init') {
+                steps {
+                    sh 'terraform init'
                 }
-                stage('Terraform destroy') {
-                    when {
-                        expression {
-                            "$State" == "destroy"
+            }
+            stage('Terraform validate') {
+                steps {
+                    sh 'terraform validate'
+                }
+            }
+            stage('Terraform plan') {
+                steps {
+                    sh 'terraform plan'
+                }
+            }
+            stage('Terraform apply/destroy') {
+                parallel {
+                    stage('Terraform apply') {
+                        when {
+                            expression {
+                                "$State" == "apply"
+                            }
+                        }
+                        steps {
+                            sh 'terraform apply --auto-approve'
                         }
                     }
-                    steps {
-                        sh 'terraform destroy --auto-approve'
+                    stage('Terraform destroy') {
+                        when {
+                            expression {
+                                "$State" == "destroy"
+                            }
+                        }
+                        steps {
+                            sh 'terraform destroy --auto-approve'
+                        }
                     }
                 }
             }
