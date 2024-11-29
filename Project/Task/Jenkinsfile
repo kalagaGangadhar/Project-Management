@@ -11,18 +11,15 @@ pipeline {
                 sh 'pwd'
             }
         }
-        stage('change directory') {
-            steps {
-                sh 'pwd'
-                dir('Project/Task')
-                sh 'pwd'
-            }
-        }
+       
         stage('Terraform init') {
             steps {
-                sh 'terraform init'
-                sh 'pwd'
+                dir('Project/Task'){
+                  sh 'terraform init'
+                  sh 'pwd'
+                }
             }
+
         }
         stage('Terraform validate') {
             steps {
