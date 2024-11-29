@@ -19,7 +19,7 @@ pipeline {
         }
         stage('change directory') {
             steps {
-                dir('/root/terraform-dir')
+                dir('/Project/Task')
             }
         }
         stage('Terraform init') {
