@@ -31,7 +31,6 @@ pipeline {
         }
         stage('Terraform plan') {
             steps {
-                sh 'pwd'
                 dir('Project/Task'){
                   sh 'terraform plan'
                   sh 'pwd'
@@ -43,7 +42,7 @@ pipeline {
                 stage('Terraform apply') {
                     when {
                         expression {
-                            "$State" == "apply"
+                            "$State" == 'apply'
                         }
                     }
                     steps {
@@ -56,7 +55,7 @@ pipeline {
                 stage('Terraform destroy') {
                     when {
                         expression {
-                            "$State" == "destroy"
+                            "$State" == 'destroy'
                         }
                     }
                     steps {
