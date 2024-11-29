@@ -20,16 +20,19 @@ pipeline {
         stage('Terraform init') {
             steps {
                 sh 'terraform init'
+                pwd
             }
         }
         stage('Terraform validate') {
             steps {
                 sh 'terraform validate'
+                pwd
             }
         }
         stage('Terraform plan') {
             steps {
                 sh 'terraform plan'
+                pwd
             }
         }
         stage('Terraform apply/destroy') {
