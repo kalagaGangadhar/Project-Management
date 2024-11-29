@@ -13,6 +13,7 @@ pipeline {
         }
         stage('change directory') {
             steps {
+                sh 'pwd'
                 dir('Project/Task')
                 sh 'pwd'
             }
