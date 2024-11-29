@@ -31,6 +31,7 @@ pipeline {
         }
         stage('Terraform plan') {
             steps {
+                sh 'pwd'
                 dir('Project/Task'){
                   sh 'terraform plan'
                   sh 'pwd'
