@@ -3,8 +3,7 @@ pipeline{
       node {
 	label 'slave1'
     }
-    }
-
+}
     stages{
         stage('pre-build step') {
             steps {
