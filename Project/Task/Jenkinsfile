@@ -11,7 +11,7 @@ pipeline {
                 sh 'pwd'
             }
         }
-       
+
         stage('Terraform init') {
             steps {
                 dir('Project/Task'){
@@ -23,14 +23,18 @@ pipeline {
         }
         stage('Terraform validate') {
             steps {
-                sh 'terraform validate'
-                sh 'pwd'
+                dir('Project/Task'){
+                  sh 'terraform validate'
+                  sh 'pwd'
+                }
             }
         }
         stage('Terraform plan') {
             steps {
-                sh 'terraform plan'
-                sh 'pwd'
+                dir('Project/Task'){
+                  sh 'terraform plan'
+                  sh 'pwd'
+                }
             }
         }
         stage('Terraform apply/destroy') {
@@ -42,7 +46,10 @@ pipeline {
                         }
                     }
                     steps {
-                        sh 'terraform apply --auto-approve'
+                        dir('Project/Task'){
+                          sh 'terraform apply'
+                          sh 'pwd'
+                        }
                     }
                 }
                 stage('Terraform destroy') {
@@ -52,7 +59,10 @@ pipeline {
                         }
                     }
                     steps {
-                        sh 'terraform destroy --auto-approve'
+                        dir('Project/Task'){
+                          sh 'terraform validate'
+                          sh 'pwd'
+                        }
                     }
                 }
             }
