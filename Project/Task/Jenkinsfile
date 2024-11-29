@@ -19,22 +19,26 @@ pipeline {
         }
         stage('change directory') {
             steps {
-                dir('/Project/Task')
+                dir('Project/Task')
+                sh 'pwd'
             }
         }
         stage('Terraform init') {
             steps {
                 sh 'terraform init'
+                sh 'pwd'
             }
         }
         stage('Terraform validate') {
             steps {
                 sh 'terraform validate'
+                sh 'pwd'
             }
         }
         stage('Terraform plan') {
             steps {
                 sh 'terraform plan'
+                sh 'pwd'
             }
         }
         stage('Terraform apply/destroy') {
