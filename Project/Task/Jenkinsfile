@@ -42,12 +42,12 @@ pipeline {
                 stage('Terraform apply') {
                     when {
                         expression {
-                            "$State" == 'apply'
+                            "$State" == "apply"
                         }
                     }
                     steps {
                         dir('Project/Task'){
-                          sh 'terraform apply'
+                          sh 'terraform apply --auto-approve'
                           sh 'pwd'
                         }
                     }
@@ -55,12 +55,12 @@ pipeline {
                 stage('Terraform destroy') {
                     when {
                         expression {
-                            "$State" == 'destroy'
+                            "$State" == "destroy"
                         }
                     }
                     steps {
                         dir('Project/Task'){
-                          sh 'terraform validate'
+                          sh 'terraform destroy --auto-approve'
                           sh 'pwd'
                         }
                     }
