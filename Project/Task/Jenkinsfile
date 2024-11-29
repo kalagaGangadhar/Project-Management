@@ -5,8 +5,6 @@ pipeline{
     }
     }
 
-
-
     stages{
         stage('pre-build step') {
             steps {
@@ -14,7 +12,7 @@ pipeline{
                 echo "Pre Build Step for Webhook Trigges the pipeline on push event"
 		'''
 	    }
-	}
+     	}
         stage('Git Checkout'){
             steps{
                 checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'github access', url: 'https://github.com/kalagaGangadhar/Project-Management.git']]])
