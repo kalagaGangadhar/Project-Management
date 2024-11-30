@@ -21,7 +21,7 @@ resource "aws_instance" "web_instance" {
       "sudo useradd -m -p 123 ansible",
       "sudo sed -i '101i ansible ALL=(ALL)       ALL' /etc/sudoers",
       "sudo sed -i '112i ansible         ALL=(ALL)       NOPASSWD: ALL' /etc/sudoers",
-      "sudo su"
+      "sudo su",
       "sudo echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config.d/01-permitrootlogin.conf",
       "sudo echo 'PasswordAuthentication yes' >> /etc/ssh/sshd_config.d/01-permitrootlogin.conf",
       "sudo sed -i '38i  PermitRootLogin yes' /etc/ssh/sshd_config",
