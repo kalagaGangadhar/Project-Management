@@ -19,6 +19,16 @@ resource "aws_instance" "web_instance" {
   provisioner "remote-exec"{
     inline = [
       "sudo useradd -m -p 123 ansible",
+      "sudo echo 'ansible ALL=(ALL)       ALL' >> ansible-v1.txt",
+      "sudo sed '/root    ALL=(ALL)       ALL/r ansible-v1.txt' visudo",
+      "sudo echo 'ansible         ALL=(ALL)       NOPASSWD: ALL' >> ansible-v2.txt",
+      "sudo sed '# %wheel        ALL=(ALL)       NOPASSWD: ALL/r ansible-v2.txt' visudo",
     ]
   }
 }
+
+#sed '/propertie/r file.txt' exam.txt
+#root    ALL=(ALL)       ALL
+ #jenkins ALL=(ALL)       ALL
+# %wheel        ALL=(ALL)       NOPASSWD: ALL
+#ansible         ALL=(ALL)       NOPASSWD: ALL
