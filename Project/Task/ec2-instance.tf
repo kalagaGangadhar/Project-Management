@@ -20,9 +20,9 @@ resource "aws_instance" "web_instance" {
     inline = [
       "sudo useradd -m -p 123 ansible",
       "sudo echo 'ansible ALL=(ALL)       ALL' >> ansible-v1.txt",
-      "sudo sed '/root    ALL=(ALL)       ALL/r ansible-v1.txt' visudo",
+      "sudo sed '/root    ALL=(ALL)       ALL/r ansible-v1.txt' /etc/sudoers",
       "sudo echo 'ansible         ALL=(ALL)       NOPASSWD: ALL' >> ansible-v2.txt",
-      "sudo sed '# %wheel        ALL=(ALL)       NOPASSWD: ALL/r ansible-v2.txt' visudo",
+      "sudo sed '# %wheel        ALL=(ALL)       NOPASSWD: ALL/r ansible-v2.txt' /etc/sudoers",
     ]
   }
 }
