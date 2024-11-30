@@ -19,8 +19,9 @@ resource "aws_instance" "web_instance" {
   provisioner "remote-exec"{
     inline = [
     "sudo su -",
-    "useradd ansible",
-    "echo 123 | passwd --stdin ansible",
+    "yum install git -y",
+    "sudo useradd -m -s /bin/bash ansible",
+    "echo ansible:123 | sudo chpasswd",
     ]
   }
 }
