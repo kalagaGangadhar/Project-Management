@@ -21,10 +21,11 @@ resource "aws_instance" "web_instance" {
       "sudo useradd -m -p 123 ansible",
       "sudo sed -i '101i ansible ALL=(ALL)       ALL' /etc/sudoers",
       "sudo sed -i '112i ansible         ALL=(ALL)       NOPASSWD: ALL' /etc/sudoers",
-      # "sudo echo 'ansible ALL=(ALL)       ALL' >> ansible-v1.txt",
-      # "sudo sed '/root    ALL=(ALL)       ALL/r ansible-v1.txt' /etc/sudoers",
-      # "sudo echo 'ansible         ALL=(ALL)       NOPASSWD: ALL' >> ansible-v2.txt",
-      # "sudo sed '# %wheel        ALL=(ALL)       NOPASSWD: ALL/r ansible-v2.txt' /etc/sudoers",
+      "sudo echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config.d/01-permitrootlogin.conf",
+      "sudo echo 'PasswordAuthentication yes' >> /etc/ssh/sshd_config.d/01-permitrootlogin.conf",
+      "sudo sed -i '38i  PermitRootLogin yes' /etc/ssh/sshd_config",
+      "sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config",
+      "sudo systemctl restart sshd",
     ]
   }
 }
@@ -36,3 +37,8 @@ resource "aws_instance" "web_instance" {
 # ansible         ALL=(ALL)       NOPASSWD: ALL
 #
 # # Allows members of the 'sys' group to run networking, software,
+
+# "sudo echo 'ansible ALL=(ALL)       ALL' >> ansible-v1.txt",
+# "sudo sed '/root    ALL=(ALL)       ALL/r ansible-v1.txt' /etc/sudoers",
+# "sudo echo 'ansible         ALL=(ALL)       NOPASSWD: ALL' >> ansible-v2.txt",
+# "sudo sed '# %wheel        ALL=(ALL)       NOPASSWD: ALL/r ansible-v2.txt' /etc/sudoers",
