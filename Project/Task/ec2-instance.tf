@@ -19,7 +19,7 @@ resource "aws_instance" "web_instance" {
   provisioner "remote-exec"{
     inline = [
     "sudo su -",
-    "useradd -m -p 123 ansible"
+    "useradd -m -p 123 ansible",
     ]
   }
 }
