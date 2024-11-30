@@ -6,7 +6,20 @@ resource "aws_instance" "web_instance" {
   tags = {
     Name = "Webserver"
   }
+  connection {
+    type = "ssh"
+    host = self.public_ip
+    user = "ec2-user"
+    private_key = file("~/private_key.pem")
+
+  }
   provisioner "local-exec" {
     command = "echo ${aws_instance.web_instance.public_ip } >> public_ip.txt"
+  }
+  provisioner "remote-exec"{
+    inline = [
+    "sudo su -",
+    "useradd -m -p 123 ansible"
+    ]
   }
 }
