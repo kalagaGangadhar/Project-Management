@@ -1,8 +1,8 @@
 resource "aws_instance" "web_instance" {
-  ami = "ami-022ce6f32988af5fa"
+  ami = "ami-0216c817811911143"
   instance_type = "t2.micro"
   key_name = "DevOps-Key"
-  vpc_security_group_ids = [ "sg-066c96337c17075b2" ]
+  vpc_security_group_ids = [ "sg-041b19651b5527db3" ]
   tags = {
     Name = "Webserver"
   }
@@ -16,20 +16,20 @@ resource "aws_instance" "web_instance" {
   provisioner "local-exec" {
     command = "echo ${aws_instance.web_instance.public_ip } >> public_ip.txt"
   }
-  provisioner "remote-exec"{
-    inline = [
-      "sudo useradd -m -p 123 ansible",
-      "sudo sed -i '101i ansible ALL=(ALL)       ALL' /etc/sudoers",
-      "sudo sed -i '112i ansible         ALL=(ALL)       NOPASSWD: ALL' /etc/sudoers",
-      "sudo su",
-      "sudo echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config.d/01-permitrootlogin.conf",
-      "sudo echo 'PasswordAuthentication yes' >> /etc/ssh/sshd_config.d/01-permitrootlogin.conf",
-      "sudo sed -i '38i  PermitRootLogin yes' /etc/ssh/sshd_config",
-      "sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config",
-      "sudo systemctl restart sshd",
-    ]
-  }
-}
+#   provisioner "remote-exec"{
+#     inline = [
+#       "sudo useradd -m -p 123 ansible",
+#       "sudo sed -i '101i ansible ALL=(ALL)       ALL' /etc/sudoers",
+#       "sudo sed -i '112i ansible         ALL=(ALL)       NOPASSWD: ALL' /etc/sudoers",
+#       "sudo su",
+#       "sudo echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config.d/01-permitrootlogin.conf",
+#       "sudo echo 'PasswordAuthentication yes' >> /etc/ssh/sshd_config.d/01-permitrootlogin.conf",
+#       "sudo sed -i '38i  PermitRootLogin yes' /etc/ssh/sshd_config",
+#       "sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config",
+#       "sudo systemctl restart sshd",
+#     ]
+#   }
+# }
 
 # sed '/propertie/r file.txt' exam.txt
 # root    ALL=(ALL)       ALL
