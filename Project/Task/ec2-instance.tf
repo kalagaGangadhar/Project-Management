@@ -1,5 +1,5 @@
 resource "aws_instance" "web_instance" {
-  ami           = "ami-0216c817811911143"
+  ami           = "ami-0a0a97e804027ad24"
   instance_type = "t2.micro"
   key_name      = "DevOps-Key"
   vpc_security_group_ids = ["sg-041b19651b5527db3"]
