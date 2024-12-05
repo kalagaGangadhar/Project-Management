@@ -1,8 +1,8 @@
 resource "aws_instance" "web_instance" {
-  ami = "ami-0216c817811911143"
+  ami           = "ami-0216c817811911143"
   instance_type = "t2.micro"
-  key_name = "DevOps-Key"
-  vpc_security_group_ids = [ "sg-041b19651b5527db3" ]
+  key_name      = "DevOps-Key"
+  vpc_security_group_ids = ["sg-041b19651b5527db3"]
   tags = {
     Name = "Webserver"
   }
@@ -16,6 +16,7 @@ resource "aws_instance" "web_instance" {
   provisioner "local-exec" {
     command = "echo ${aws_instance.web_instance.public_ip } >> public_ip.txt"
   }
+}
 #   provisioner "remote-exec"{
 #     inline = [
 #       "sudo useradd -m -p 123 ansible",
