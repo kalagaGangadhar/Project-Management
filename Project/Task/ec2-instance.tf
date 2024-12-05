@@ -16,10 +16,10 @@ resource "aws_instance" "web_instance" {
   provisioner "local-exec" {
     command = "echo ${aws_instance.web_instance.public_ip } >> public_ip.txt"
   }
-  provisioner "file" {
-    source = "/var/lib/jenkins/.ssh/authorized_keys"
-    destination = "/home/ansible/.ssh/authorized_keys"
-  }
+  # provisioner "file" {
+  #   source = "/var/lib/jenkins/.ssh/authorized_keys"
+  #   destination = "/home/ansible/.ssh/authorized_keys"
+  # }
 }
 #   provisioner "remote-exec"{
 #     inline = [
@@ -34,7 +34,6 @@ resource "aws_instance" "web_instance" {
 #       "sudo systemctl restart sshd",
 #     ]
 #   }
-# }
 
 # sed '/propertie/r file.txt' exam.txt
 # root    ALL=(ALL)       ALL
