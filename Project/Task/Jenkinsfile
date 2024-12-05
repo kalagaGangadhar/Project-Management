@@ -67,10 +67,15 @@ pipeline {
                 }
             }
         }
-         stage('Ansible Deployment') {
+        stage('Ansible Deployment') {
+            when {
+                expression {
+                    "$State" == "apply"
+                }
+            }
             steps {
                 script {
-                    sh "ansible-playbook -i /var/lib/jenkins/inventory Project/Task/webserver-tomcat.yml -vv"
+                    sh "ansible-playbook Project/Ansible/webserver-1-tomcat.yml -vv"
                 }
             }
         }
