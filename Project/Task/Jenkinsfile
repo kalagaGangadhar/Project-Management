@@ -67,6 +67,16 @@ pipeline {
                 }
             }
         }
+        stage ('Update Local Repository') {
+            when {
+                expression {
+                    "$State" == "apply"
+                }
+            }
+            steps {
+                sh "mvn install"
+            }
+        }
         stage('Ansible Deployment') {
             when {
                 expression {
