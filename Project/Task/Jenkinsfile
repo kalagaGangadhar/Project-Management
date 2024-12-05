@@ -75,6 +75,7 @@ pipeline {
             }
             steps {
                 sh "mvn install"
+                sh "cp -r ${WORKSPACE}/webapp/target/webapp.war /var/lib/jenkins/"
             }
         }
         stage('Ansible Deployment') {
