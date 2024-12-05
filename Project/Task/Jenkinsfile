@@ -49,6 +49,7 @@ pipeline {
                         dir('Project/Task'){
                           sh 'terraform apply --auto-approve'
                           sh 'pwd'
+                          sh 'mvn --version'
                         }
                     }
                 }
