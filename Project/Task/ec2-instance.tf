@@ -14,7 +14,7 @@ resource "aws_instance" "web_instance" {
 
   }
   provisioner "local-exec" {
-    command = "echo ${aws_instance.web_instance.public_ip } >> /var/lib/jenkins/inventory"
+    command = "echo ${aws_instance.web_instance.private_ip } >> /var/lib/jenkins/inventory"
   }
   # provisioner "file" {
   #   source = "/var/lib/jenkins/.ssh/authorized_keys"
