@@ -95,5 +95,17 @@ pipeline {
                 }
             }
         }
+        stage('Clear Inventory') {
+            when {
+                expression {
+                    "$State" == "destroy"
+                }
+            }
+            steps {
+                sh 'cd ~'
+                sh 'pwd'
+                sh 'echo [webserver] > inventory'
+            }
+        }
     }
 }
